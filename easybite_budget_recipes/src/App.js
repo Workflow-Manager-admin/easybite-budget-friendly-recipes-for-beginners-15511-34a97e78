@@ -641,26 +641,51 @@ function App() {
                 </button>
               ))}
             </div>
-            {/* Only render the selected category */}
-            <div style={{
-              display: 'flex',
-              gap: '32px',
-              flexWrap: 'wrap',
-              justifyContent: 'center',
-              margin: '16px 0',
-              minHeight: 100
-            }}>
-              {CATEGORIES.filter(c => c.id === selectedCategoryId).map(category => (
-                <CategoryCard
-                  key={category.id}
-                  icon={category.icon}
-                  title={category.label}
-                  description={category.description}
-                  bgColor="#FFFDEB"
-                  accentColor="#FFD600"
-                  recipes={category.recipes}
-                />
-              ))}
+            {/* Render ALL categories in rows of 3 */}
+            <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '32px',
+                  margin: '16px 0',
+                  alignItems: 'center',
+                  minHeight: 100
+                }}
+            >
+              {/* Arrange recipe columns: first 3 in first row, next 3 in second row, rest in further rows */}
+              {(() => {
+                // Prepare category card nodes first
+                const categoryCards = CATEGORIES.map(category => (
+                  <CategoryCard
+                    key={category.id}
+                    icon={category.icon}
+                    title={category.label}
+                    description={category.description}
+                    bgColor="#FFFDEB"
+                    accentColor="#FFD600"
+                    recipes={category.recipes}
+                  />
+                ));
+                // Break into rows (maximum of 3 per row)
+                const rows = [];
+                for (let i = 0; i < categoryCards.length; i += 3) {
+                  rows.push(categoryCards.slice(i, i + 3));
+                }
+                return rows.map((rowCards, rowIdx) => (
+                  <div
+                    key={rowIdx}
+                    style={{
+                      display: 'flex',
+                      gap: '32px',
+                      flexWrap: 'wrap',
+                      justifyContent: 'center',
+                      width: '100%',
+                    }}
+                  >
+                    {rowCards}
+                  </div>
+                ));
+              })()}
             </div>
           </section>
 
