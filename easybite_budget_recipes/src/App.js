@@ -895,49 +895,6 @@ function App() {
           {/* Recipe Categories */}
           <section id="recipes" style={{ marginBottom: 36, background: '#FFF9C4', borderRadius: 12, padding: '24px 0', boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
             <h2 style={{ color: '#FFD600', fontSize: '2rem', fontWeight: 700, marginBottom: 18, marginLeft: 24, letterSpacing: '0.01em' }}>Recipe Categories</h2>
-            {/* Category selection UI */}
-            <div
-              style={{
-                display: 'flex',
-                gap: '20px',
-                justifyContent: 'center',
-                margin: '10px 0 22px 0'
-              }}
-              aria-label="Select recipe category"
-            >
-              {CATEGORIES.map(category => (
-                <button
-                  key={category.id}
-                  type="button"
-                  style={{
-                    background: selectedCategoryId === category.id ? '#FFD600' : '#FFFDEB',
-                    color: selectedCategoryId === category.id ? '#222' : '#777',
-                    border: selectedCategoryId === category.id
-                      ? '2.5px solid #FFD600'
-                      : '1.5px solid #FFD600',
-                    borderRadius: 7,
-                    fontWeight: selectedCategoryId === category.id ? 700 : 500,
-                    fontSize: '1.05rem',
-                    letterSpacing: '0.02em',
-                    transition: 'all 0.1s',
-                    padding: '7px 24px',
-                    boxShadow: selectedCategoryId === category.id ? '0 1.5px 5px #FFE082' : 'none',
-                    cursor: selectedCategoryId === category.id ? 'default' : 'pointer',
-                    outline: selectedCategoryId === category.id ? '2px solid #FFD60055' : 'none',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 7
-                  }}
-                  onClick={() => setSelectedCategoryId(category.id)}
-                  aria-pressed={selectedCategoryId === category.id}
-                  tabIndex={0}
-                  disabled={selectedCategoryId === category.id}
-                >
-                  <span style={{ fontSize: '1.27em', verticalAlign: 'middle' }}>{category.icon}</span>
-                  {category.label}
-                </button>
-              ))}
-            </div>
             {/* Render ALL categories in rows of 3 */}
             <div
                 style={{
