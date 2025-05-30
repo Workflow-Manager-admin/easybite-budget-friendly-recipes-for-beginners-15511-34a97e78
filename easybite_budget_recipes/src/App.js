@@ -660,14 +660,30 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
           lineHeight: 1.45,
           fontWeight: 400
         }}>
-          {recipes.map((r, idx) => (
-            <li key={idx}
-              style={{
-                padding: '1px 0',
-                borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
-              }}
-            >{r}</li>
-          ))}
+          {recipes.map((r, idx) =>
+            typeof r === "string" ? (
+              <li key={idx}
+                style={{
+                  padding: '1px 0',
+                  borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
+                }}
+              >{r}</li>
+            ) : (
+              <li key={idx}
+                style={{
+                  padding: '8px 0',
+                  borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
+                }}
+              >
+                <div style={{ fontWeight: 600, marginBottom: 3 }}>{r.name}</div>
+                <ol style={{ paddingLeft: "20px", margin: 0 }}>
+                  {(r.steps || []).map((step, sidx) => (
+                    <li key={sidx} style={{ marginBottom: 2 }}>{step}</li>
+                  ))}
+                </ol>
+              </li>
+            )
+          )}
         </ul>
       )}
     </div>
