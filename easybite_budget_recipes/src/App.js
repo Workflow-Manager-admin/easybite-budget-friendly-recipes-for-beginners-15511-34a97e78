@@ -117,6 +117,18 @@ function App() {
                 description="Minimal fuss, minimal shopping—delicious meals with just five ingredients!"
                 bgColor="#FFFDEB"
                 accentColor="#FFD600"
+                recipes={[
+                  "1. Garlic Butter Pasta",
+                  "2. Cheesy Tortilla Quesadilla",
+                  "3. Peanut Butter Banana Toast",
+                  "4. Egg Fried Rice",
+                  "5. Tomato Soup with Grilled Cheese",
+                  "6. Chickpea and Spinach Curry",
+                  "7. Avocado Toast Deluxe",
+                  "8. One-Pan Sausage & Veg",
+                  "9. Tuna Mayo Rice Bowl",
+                  "10. Honey Soy Chicken Stir-Fry"
+                ]}
               />
               {/* Category: Student Meals */}
               <CategoryCard
@@ -125,6 +137,18 @@ function App() {
                 description="Quick, affordable and filling recipes you can prepare in under 30 minutes."
                 bgColor="#FFFDEB"
                 accentColor="#FFD600"
+                recipes={[
+                  "1. Microwave Mug Omelette",
+                  "2. One-Pot Ramen Bowl",
+                  "3. Wrap Pizza Express",
+                  "4. Canned Chili Nachos",
+                  "5. Pita Pocket Sandwiches",
+                  "6. Taco Rice Skillet",
+                  "7. Toasted Cheese Melt",
+                  "8. No-Cook Greek Salad",
+                  "9. Black Bean Burritos",
+                  "10. Simple Stir-Fried Udon"
+                ]}
               />
               {/* Category: Vegan by Protein */}
               <CategoryCard
@@ -133,6 +157,18 @@ function App() {
                 description="Find vegan meals by your favorite protein: beans, lentils, tofu, and more."
                 bgColor="#FFFDEB"
                 accentColor="#FFD600"
+                recipes={[
+                  "1. Lentil & Tomato Stew",
+                  "2. Tofu Scramble Wrap",
+                  "3. Chickpea Spinach Sauté",
+                  "4. Black Bean Stuffed Peppers",
+                  "5. Peanut Butter Noodle Bowl",
+                  "6. Kidney Bean Chili",
+                  "7. Hummus Veggie Wrap",
+                  "8. Red Lentil Curry",
+                  "9. Sesame Tofu Bites",
+                  "10. Bean & Corn Rice Skillet"
+                ]}
               />
               {/* Category: Build-a-Recipe */}
               <CategoryCard
@@ -141,6 +177,18 @@ function App() {
                 description="Choose your ingredients—get recipe fits instantly!"
                 bgColor="#FFFDEB"
                 accentColor="#FFD600"
+                recipes={[
+                  "1. Choose from: Pasta, Eggs, Tomato, Soy Sauce, Rice, Beans, Spinach, Potatoes, Chicken, Tofu",
+                  "2. Garlic Butter Pasta",
+                  "3. Chickpea Spinach Sauté",
+                  "4. Egg Fried Rice",
+                  "5. Peanut Butter Noodle Bowl",
+                  "6. Avocado Toast Deluxe",
+                  "7. Red Lentil Curry",
+                  "8. Tuna Mayo Rice Bowl",
+                  "9. Tofu Scramble Wrap",
+                  "10. Black Bean Stuffed Peppers"
+                ]}
               />
             </div>
           </section>
