@@ -515,7 +515,7 @@ function App() {
         padding: '30px 0 18px 0',
         fontSize: '1.02rem'
       }}>
-        &copy; {new Date().getFullYear()} EasyBite — Budget Friendly Recipes for Beginners
+        &copy; {new Date().getFullYear()} Bachelor's Cooking — Budget Friendly Recipes for Beginners
       </footer>
     </div>
   );
