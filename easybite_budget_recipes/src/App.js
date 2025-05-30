@@ -527,67 +527,9 @@ function App() {
           }}>
             <h2 style={{ color: '#222', fontWeight: 700, fontSize: '1.75rem', marginBottom: 14 }}>Build-a-Recipe Tool</h2>
             <div style={{ color: '#666', marginBottom: 18 }}>
-              Select the ingredients you have, and we&rsquo;ll suggest beginner-friendly, budget recipes you can make!
+              Select the ingredients you have, and we’ll generate a budget-friendly recipe you can cook!
             </div>
-            {/* Placeholder for input demo for now */}
-            <div style={{
-              background: '#FFF',
-              padding: '20px 18px',
-              borderRadius: 8,
-              boxShadow: '0 1px 6px rgba(34,34,34,0.06)',
-              width: '100%',
-              maxWidth: 490,
-              margin: '0 auto'
-            }}>
-              <div style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                gap: '8px 12px',
-                justifyContent: 'center',
-                marginBottom: 8
-              }}>
-                <span style={{
-                  background: '#FFF9C4',
-                  color: '#222',
-                  border: '1px solid #FFD600',
-                  borderRadius: 4,
-                  padding: '6px 16px',
-                  fontWeight: 500
-                }}>Pasta</span>
-                <span style={{
-                  background: '#FFF9C4',
-                  color: '#222',
-                  border: '1px solid #FFD600',
-                  borderRadius: 4,
-                  padding: '6px 16px'
-                }}>Eggs</span>
-                <span style={{
-                  background: '#FFF9C4',
-                  color: '#222',
-                  border: '1px solid #FFD600',
-                  borderRadius: 4,
-                  padding: '6px 16px'
-                }}>Tomato</span>
-                <span style={{
-                  background: '#FFF9C4',
-                  color: '#222',
-                  border: '1px solid #FFD600',
-                  borderRadius: 4,
-                  padding: '6px 16px'
-                }}>Soy Sauce</span>
-              </div>
-              <button className="btn"
-                style={{
-                  background: '#FFD600',
-                  color: '#222',
-                  fontWeight: 600,
-                  fontSize: '1rem',
-                  width: '100%',
-                  marginTop: 10
-                }}>
-                Find Recipes
-              </button>
-            </div>
+            <BuildARecipeTool />
           </section>
 
           {/* About/EasyBite Info */}
