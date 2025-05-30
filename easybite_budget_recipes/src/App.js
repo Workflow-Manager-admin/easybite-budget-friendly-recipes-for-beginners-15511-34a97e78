@@ -331,7 +331,7 @@ function App() {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%' }}>
             <div className="logo" style={{ fontWeight: 700, fontSize: '1.6rem', letterSpacing: '1px' }}>
               <span className="logo-symbol" style={{ color: '#FFD600', fontSize: '1.8rem' }}>🍳</span>
-              EasyBite
+              Bachelor's Cooking
             </div>
             <nav className="main-menu" aria-label="Main navigation">
               <ul style={{
@@ -372,7 +372,7 @@ function App() {
             lineHeight: 1.15,
             letterSpacing: '-0.02em',
           }}>
-            EasyBite
+            Bachelor's Cooking
           </h1>
           <div className="description" style={{
             color: '#444',
@@ -498,10 +498,10 @@ function App() {
             boxShadow: '0 1px 8px rgba(200,200,0,0.07)'
           }}>
             <h2 style={{ color: '#FFD600', fontSize: '1.5rem', fontWeight: 700, marginBottom: 6 }}>
-              About EasyBite
+              About Bachelor's Cooking
             </h2>
             <div style={{ color: '#222', fontSize: '1.11rem', lineHeight: 1.6 }}>
-              EasyBite is made for those new to cooking, students, or anyone who wants delicious meals on a budget. All recipes are meant to be stress-free, customizable, and suitable for a wide variety of dietary needs. Discover, experiment, and enjoy your cooking journey!
+              Bachelor's Cooking is made for those new to cooking, students, or anyone who wants delicious meals on a budget. All recipes are meant to be stress-free, customizable, and suitable for a wide variety of dietary needs. Discover, experiment, and enjoy your cooking journey!
             </div>
           </section>
         </div>
