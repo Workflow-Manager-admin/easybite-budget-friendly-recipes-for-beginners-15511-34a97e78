@@ -301,7 +301,7 @@ function App() {
 /**
  * Reusable Card for Recipe Categories.
  */
-function CategoryCard({ icon, title, description, accentColor, bgColor }) {
+function CategoryCard({ icon, title, description, accentColor, bgColor, recipes }) {
   return (
     <div style={{
       flex: '1 1 180px',
@@ -325,6 +325,27 @@ function CategoryCard({ icon, title, description, accentColor, bgColor }) {
         {title}
       </div>
       <div style={{ color: '#555', fontSize: '0.97rem', fontWeight: 400 }}>{description}</div>
+      {Array.isArray(recipes) && (
+        <ul style={{
+          margin: '16px 0 0 0',
+          padding: 0,
+          listStyle: 'none',
+          textAlign: 'left',
+          fontSize: '0.97rem',
+          color: '#444',
+          lineHeight: 1.45,
+          fontWeight: 400
+        }}>
+          {recipes.map((r, idx) => (
+            <li key={idx}
+              style={{
+                padding: '1px 0',
+                borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
+              }}
+            >{r}</li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }
