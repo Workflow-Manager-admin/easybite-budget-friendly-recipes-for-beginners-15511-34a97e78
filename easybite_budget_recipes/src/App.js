@@ -19,7 +19,106 @@ function App() {
       icon: '🖐️',
       description: "Minimal fuss, minimal shopping—delicious meals with just five ingredients!",
       recipes: [
-        // ... unchanged recipes here ...
+        {
+          name: "One-Pan Chicken & Veggies",
+          steps: [
+            "Preheat oven to 200°C/400°F.",
+            "Spread chopped chicken breast and mixed veggies (like bell peppers and zucchini) on a baking tray.",
+            "Drizzle with olive oil, sprinkle with salt, pepper, and Italian herbs.",
+            "Toss to coat, then spread out evenly.",
+            "Roast for 20–25 min, stirring once, until chicken is cooked and veggies are tender."
+          ]
+        },
+        {
+          name: "Pasta with Tomato & Basil",
+          steps: [
+            "Cook pasta in boiling salted water until tender; drain.",
+            "Heat olive oil in a pan, add chopped tomatoes and cook 5 min.",
+            "Add cooked pasta to pan, toss to coat.",
+            "Stir in torn fresh basil, and season with salt and pepper.",
+            "Serve hot with grated cheese if desired."
+          ]
+        },
+        {
+          name: "Egg Fried Rice",
+          steps: [
+            "Cook rice and let it cool (or use leftover rice).",
+            "Heat oil in a pan; add beaten eggs and scramble.",
+            "Add rice and frozen peas/carrot mix; stir-fry 3 min.",
+            "Season with soy sauce.",
+            "Serve hot, garnished with green onions."
+          ]
+        },
+        {
+          name: "Simple Bean Tacos",
+          steps: [
+            "Heat canned black or pinto beans in a saucepan with taco seasoning.",
+            "Warm tortillas in a pan or microwave.",
+            "Spoon beans into tortillas.",
+            "Top with shredded cheese and salsa.",
+            "Fold and enjoy."
+          ]
+        },
+        {
+          name: "Cheesy Vegetable Quesadilla",
+          steps: [
+            "Place grated cheese and thinly sliced veggies (like bell pepper or spinach) on one half of a tortilla.",
+            "Fold tortilla in half.",
+            "Cook in a nonstick skillet over medium heat until golden, flip and cook other side.",
+            "Slice into wedges.",
+            "Serve with salsa or sour cream."
+          ]
+        },
+        {
+          name: "Creamy Avocado Toast",
+          steps: [
+            "Toast bread slices.",
+            "Mash a ripe avocado with a pinch of salt and lemon juice.",
+            "Spread avocado mash on toast.",
+            "Sprinkle with chili flakes or black pepper.",
+            "Enjoy immediately."
+          ]
+        },
+        {
+          name: "Honey Mustard Chicken Thighs",
+          steps: [
+            "In a bowl, mix honey, mustard, olive oil, salt, and pepper.",
+            "Coat chicken thighs in the mixture.",
+            "Place in a baking dish.",
+            "Bake at 200°C/400°F for 25–30 minutes, until cooked through.",
+            "Serve with your favorite side."
+          ]
+        },
+        {
+          name: "Garlic Butter Shrimp",
+          steps: [
+            "Heat butter in a skillet over medium heat.",
+            "Add minced garlic and cook for 30 seconds.",
+            "Add peeled shrimp, cook until pink (2–3 min per side).",
+            "Season with salt and pepper.",
+            "Serve hot with lemon wedges."
+          ]
+        },
+        {
+          name: "Sausage & Potato Skillet",
+          steps: [
+            "Slice sausages and potatoes thinly.",
+            "Heat oil in a skillet.",
+            "Add sausages and potatoes; season with salt, pepper, and paprika.",
+            "Cook, stirring occasionally, until potatoes are fork-tender.",
+            "Serve hot."
+          ]
+        },
+        {
+          name: "Easy Caprese Salad",
+          steps: [
+            "Slice fresh mozzarella and tomatoes.",
+            "Alternate slices on a plate.",
+            "Tuck fresh basil leaves between layers.",
+            "Drizzle with olive oil and balsamic vinegar.",
+            "Sprinkle with salt and serve."
+          ]
+        }
       ]
     },
     {
@@ -28,7 +127,106 @@ function App() {
       icon: '🕒',
       description: "Quick, affordable and filling recipes you can prepare in under 30 minutes.",
       recipes: [
-        // ... unchanged recipes here ...
+        {
+          name: "One-Pan Chicken & Veggies",
+          steps: [
+            "Preheat oven to 200°C/400°F.",
+            "Spread chopped chicken breast and mixed veggies (like bell peppers and zucchini) on a baking tray.",
+            "Drizzle with olive oil, sprinkle with salt, pepper, and Italian herbs.",
+            "Toss to coat, then spread out evenly.",
+            "Roast for 20–25 min, stirring once, until chicken is cooked and veggies are tender."
+          ]
+        },
+        {
+          name: "Pasta with Tomato & Basil",
+          steps: [
+            "Cook pasta in boiling salted water until tender; drain.",
+            "Heat olive oil in a pan, add chopped tomatoes and cook 5 min.",
+            "Add cooked pasta to pan, toss to coat.",
+            "Stir in torn fresh basil, and season with salt and pepper.",
+            "Serve hot with grated cheese if desired."
+          ]
+        },
+        {
+          name: "Egg Fried Rice",
+          steps: [
+            "Cook rice and let it cool (or use leftover rice).",
+            "Heat oil in a pan; add beaten eggs and scramble.",
+            "Add rice and frozen peas/carrot mix; stir-fry 3 min.",
+            "Season with soy sauce.",
+            "Serve hot, garnished with green onions."
+          ]
+        },
+        {
+          name: "Simple Bean Tacos",
+          steps: [
+            "Heat canned black or pinto beans in a saucepan with taco seasoning.",
+            "Warm tortillas in a pan or microwave.",
+            "Spoon beans into tortillas.",
+            "Top with shredded cheese and salsa.",
+            "Fold and enjoy."
+          ]
+        },
+        {
+          name: "Cheesy Vegetable Quesadilla",
+          steps: [
+            "Place grated cheese and thinly sliced veggies (like bell pepper or spinach) on one half of a tortilla.",
+            "Fold tortilla in half.",
+            "Cook in a nonstick skillet over medium heat until golden, flip and cook other side.",
+            "Slice into wedges.",
+            "Serve with salsa or sour cream."
+          ]
+        },
+        {
+          name: "Creamy Avocado Toast",
+          steps: [
+            "Toast bread slices.",
+            "Mash a ripe avocado with a pinch of salt and lemon juice.",
+            "Spread avocado mash on toast.",
+            "Sprinkle with chili flakes or black pepper.",
+            "Enjoy immediately."
+          ]
+        },
+        {
+          name: "Honey Mustard Chicken Thighs",
+          steps: [
+            "In a bowl, mix honey, mustard, olive oil, salt, and pepper.",
+            "Coat chicken thighs in the mixture.",
+            "Place in a baking dish.",
+            "Bake at 200°C/400°F for 25–30 minutes, until cooked through.",
+            "Serve with your favorite side."
+          ]
+        },
+        {
+          name: "Garlic Butter Shrimp",
+          steps: [
+            "Heat butter in a skillet over medium heat.",
+            "Add minced garlic and cook for 30 seconds.",
+            "Add peeled shrimp, cook until pink (2–3 min per side).",
+            "Season with salt and pepper.",
+            "Serve hot with lemon wedges."
+          ]
+        },
+        {
+          name: "Sausage & Potato Skillet",
+          steps: [
+            "Slice sausages and potatoes thinly.",
+            "Heat oil in a skillet.",
+            "Add sausages and potatoes; season with salt, pepper, and paprika.",
+            "Cook, stirring occasionally, until potatoes are fork-tender.",
+            "Serve hot."
+          ]
+        },
+        {
+          name: "Easy Caprese Salad",
+          steps: [
+            "Slice fresh mozzarella and tomatoes.",
+            "Alternate slices on a plate.",
+            "Tuck fresh basil leaves between layers.",
+            "Drizzle with olive oil and balsamic vinegar.",
+            "Sprinkle with salt and serve."
+          ]
+        }
       ]
     },
     {
@@ -37,7 +235,106 @@ function App() {
       icon: '🌱',
       description: "Find vegan meals by your favorite protein: beans, lentils, tofu, and more.",
       recipes: [
-        // ... unchanged recipes here ...
+        {
+          name: "One-Pan Chicken & Veggies",
+          steps: [
+            "Preheat oven to 200°C/400°F.",
+            "Spread chopped chicken breast and mixed veggies (like bell peppers and zucchini) on a baking tray.",
+            "Drizzle with olive oil, sprinkle with salt, pepper, and Italian herbs.",
+            "Toss to coat, then spread out evenly.",
+            "Roast for 20–25 min, stirring once, until chicken is cooked and veggies are tender."
+          ]
+        },
+        {
+          name: "Pasta with Tomato & Basil",
+          steps: [
+            "Cook pasta in boiling salted water until tender; drain.",
+            "Heat olive oil in a pan, add chopped tomatoes and cook 5 min.",
+            "Add cooked pasta to pan, toss to coat.",
+            "Stir in torn fresh basil, and season with salt and pepper.",
+            "Serve hot with grated cheese if desired."
+          ]
+        },
+        {
+          name: "Egg Fried Rice",
+          steps: [
+            "Cook rice and let it cool (or use leftover rice).",
+            "Heat oil in a pan; add beaten eggs and scramble.",
+            "Add rice and frozen peas/carrot mix; stir-fry 3 min.",
+            "Season with soy sauce.",
+            "Serve hot, garnished with green onions."
+          ]
+        },
+        {
+          name: "Simple Bean Tacos",
+          steps: [
+            "Heat canned black or pinto beans in a saucepan with taco seasoning.",
+            "Warm tortillas in a pan or microwave.",
+            "Spoon beans into tortillas.",
+            "Top with shredded cheese and salsa.",
+            "Fold and enjoy."
+          ]
+        },
+        {
+          name: "Cheesy Vegetable Quesadilla",
+          steps: [
+            "Place grated cheese and thinly sliced veggies (like bell pepper or spinach) on one half of a tortilla.",
+            "Fold tortilla in half.",
+            "Cook in a nonstick skillet over medium heat until golden, flip and cook other side.",
+            "Slice into wedges.",
+            "Serve with salsa or sour cream."
+          ]
+        },
+        {
+          name: "Creamy Avocado Toast",
+          steps: [
+            "Toast bread slices.",
+            "Mash a ripe avocado with a pinch of salt and lemon juice.",
+            "Spread avocado mash on toast.",
+            "Sprinkle with chili flakes or black pepper.",
+            "Enjoy immediately."
+          ]
+        },
+        {
+          name: "Honey Mustard Chicken Thighs",
+          steps: [
+            "In a bowl, mix honey, mustard, olive oil, salt, and pepper.",
+            "Coat chicken thighs in the mixture.",
+            "Place in a baking dish.",
+            "Bake at 200°C/400°F for 25–30 minutes, until cooked through.",
+            "Serve with your favorite side."
+          ]
+        },
+        {
+          name: "Garlic Butter Shrimp",
+          steps: [
+            "Heat butter in a skillet over medium heat.",
+            "Add minced garlic and cook for 30 seconds.",
+            "Add peeled shrimp, cook until pink (2–3 min per side).",
+            "Season with salt and pepper.",
+            "Serve hot with lemon wedges."
+          ]
+        },
+        {
+          name: "Sausage & Potato Skillet",
+          steps: [
+            "Slice sausages and potatoes thinly.",
+            "Heat oil in a skillet.",
+            "Add sausages and potatoes; season with salt, pepper, and paprika.",
+            "Cook, stirring occasionally, until potatoes are fork-tender.",
+            "Serve hot."
+          ]
+        },
+        {
+          name: "Easy Caprese Salad",
+          steps: [
+            "Slice fresh mozzarella and tomatoes.",
+            "Alternate slices on a plate.",
+            "Tuck fresh basil leaves between layers.",
+            "Drizzle with olive oil and balsamic vinegar.",
+            "Sprinkle with salt and serve."
+          ]
+        }
       ]
     },
 
