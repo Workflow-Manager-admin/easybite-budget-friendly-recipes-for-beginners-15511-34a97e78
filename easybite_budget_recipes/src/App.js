@@ -7,7 +7,312 @@ function App() {
    * Main container for the EasyBite: Budget-Friendly Recipes for Beginners.
    * Implements a visually clean/top-aligned column layout,
    * clear sections for each feature, and beginner-friendly UI.
+   *
+   * REF: Now allows users to select a recipe column/category, showing only that column at a time.
    */
+
+  // Category data - same order as the visual and matches the category card content below
+  const CATEGORIES = [
+    {
+      id: 'five-ingredients',
+      label: '5-Ingredient Recipes',
+      icon: '🖐️',
+      description: "Minimal fuss, minimal shopping—delicious meals with just five ingredients!",
+      recipes: [
+        {
+          name: "Garlic Butter Pasta",
+          steps: [
+            "Cook pasta in boiling salted water until al dente.",
+            "While pasta cooks, melt butter in a skillet and gently sauté minced garlic until fragrant.",
+            "Drain pasta, reserving a splash of pasta water.",
+            "Toss pasta with garlic butter, adding a bit of pasta water if dry. Season with salt and pepper.",
+            "Serve hot, topped with grated cheese if desired."
+          ]
+        },
+        {
+          name: "Cheesy Tortilla Quesadilla",
+          steps: [
+            "Heat a skillet over medium.",
+            "Place a tortilla in the pan, evenly sprinkle shredded cheese over half.",
+            "Fold tortilla over to cover cheese.",
+            "Cook until golden brown, flip, and cook second side until cheese is melted.",
+            "Cut into wedges and serve."
+          ]
+        },
+        {
+          name: "Peanut Butter Banana Toast",
+          steps: [
+            "Toast bread slices to your liking.",
+            "Spread peanut butter onto warm toast.",
+            "Slice banana and arrange over peanut butter.",
+            "Drizzle with honey and a pinch of cinnamon if desired.",
+            "Serve immediately."
+          ]
+        },
+        {
+          name: "Egg Fried Rice",
+          steps: [
+            "Heat oil in a pan/wok, scramble eggs and set aside.",
+            "In same pan, add a bit more oil and stir-fry cooked rice until hot.",
+            "Add in thawed peas/carrot mix and the scrambled eggs.",
+            "Season with soy sauce, mixing well.",
+            "Serve garnished with spring onions."
+          ]
+        },
+        {
+          name: "Tomato Soup with Grilled Cheese",
+          steps: [
+            "In a pot, heat canned tomato soup and water/milk as directed.",
+            "Meanwhile, butter bread slices and add cheese in between.",
+            "Grill in a pan on both sides until bread is golden and cheese melted.",
+            "Cut sandwich into halves and serve with hot soup."
+          ]
+        },
+        {
+          name: "Chickpea and Spinach Curry",
+          steps: [
+            "Sauté onion and garlic in oil until soft.",
+            "Add canned chickpeas (drained), canned diced tomatoes, and curry powder.",
+            "Simmer 10 minutes, stir in fresh spinach until wilted.",
+            "Season with salt and serve with rice or bread."
+          ]
+        },
+        {
+          name: "Avocado Toast Deluxe",
+          steps: [
+            "Toast whole grain bread.",
+            "Mash ripe avocado with lemon, salt, pepper.",
+            "Spread mash over toast, top with sliced tomato or radish.",
+            "Sprinkle optional chili flakes or seeds.",
+            "Serve immediately."
+          ]
+        },
+        {
+          name: "One-Pan Sausage & Veg",
+          steps: [
+            "Slice sausage and chop veggies (bell pepper, onion, zucchini, etc).",
+            "Heat oil in skillet, cook sausage until browned.",
+            "Add veggies, sauté until tender.",
+            "Season with salt, pepper, herbs.",
+            "Serve hot."
+          ]
+        },
+        {
+          name: "Tuna Mayo Rice Bowl",
+          steps: [
+            "Cook rice according to package.",
+            "Mix canned tuna with mayonnaise, a pinch of salt, pepper.",
+            "Serve tuna mixture over hot rice, add sliced cucumber or corn if desired.",
+            "Garnish with green onions."
+          ]
+        },
+        {
+          name: "Honey Soy Chicken Stir-Fry",
+          steps: [
+            "Cut chicken into strips and veggies of choice.",
+            "Heat oil, stir-fry chicken until mostly cooked.",
+            "Add veggies and cook until crisp-tender.",
+            "Stir in honey and soy sauce, toss to coat.",
+            "Serve with steamed rice."
+          ]
+        }
+      ]
+    },
+    {
+      id: 'student-meals',
+      label: 'Student Meals',
+      icon: '🕒',
+      description: "Quick, affordable and filling recipes you can prepare in under 30 minutes.",
+      recipes: [
+        {
+          name: "Microwave Mug Omelette",
+          steps: [
+            "In a mug, beat 2 eggs with a splash of milk.",
+            "Add chopped veggies and grated cheese.",
+            "Microwave 60–90 seconds until puffed and set.",
+            "Season with salt and enjoy from the mug."
+          ]
+        },
+        {
+          name: "One-Pot Ramen Bowl",
+          steps: [
+            "Boil water in a saucepan, add ramen noodles and included seasoning.",
+            "When nearly cooked, stir in frozen veggies or spinach and an egg if desired.",
+            "Simmer until noodles and veggies are tender.",
+            "Serve immediately."
+          ]
+        },
+        {
+          name: "Wrap Pizza Express",
+          steps: [
+            "Lay a tortilla wrap on a baking tray.",
+            "Spread tomato sauce and sprinkle cheese on top.",
+            "Add sliced veggies or pepperoni if using.",
+            "Grill or bake until cheese bubbles and edges crisp.",
+            "Slice and serve."
+          ]
+        },
+        {
+          name: "Canned Chili Nachos",
+          steps: [
+            "Preheat oven to 180°C/350°F.",
+            "Spread tortilla chips on a baking dish.",
+            "Top with canned chili and shredded cheese.",
+            "Bake until cheese is melted and bubbly.",
+            "Serve with sour cream or sliced jalapeños."
+          ]
+        },
+        {
+          name: "Pita Pocket Sandwiches",
+          steps: [
+            "Cut pita breads in half, form pockets.",
+            "Fill with hummus, chopped salad, and cheese or chicken strips.",
+            "Wrap and enjoy fresh."
+          ]
+        },
+        {
+          name: "Taco Rice Skillet",
+          steps: [
+            "Brown ground beef (or beans) in pan.",
+            "Add taco seasoning and cooked rice.",
+            "Stir in salsa and heat through.",
+            "Serve with shredded cheese and lettuce."
+          ]
+        },
+        {
+          name: "Toasted Cheese Melt",
+          steps: [
+            "Butter two bread slices, add cheese in between.",
+            "Toast in sandwich press or skillet until golden on both sides.",
+            "Slice diagonally and serve warm."
+          ]
+        },
+        {
+          name: "No-Cook Greek Salad",
+          steps: [
+            "Chop cucumber, tomatoes, onion, and olives.",
+            "Toss with olive oil, salt, pepper, and feta cheese.",
+            "Serve cold."
+          ]
+        },
+        {
+          name: "Black Bean Burritos",
+          steps: [
+            "Mash canned black beans with salsa.",
+            "Spread mixture on tortillas, add cheese.",
+            "Roll, wrap, then microwave or grill till warm."
+          ]
+        },
+        {
+          name: "Simple Stir-Fried Udon",
+          steps: [
+            "Heat oil, stir-fry chopped veggies in pan.",
+            "Add cooked udon noodles and soy sauce.",
+            "Stir-fry until hot. Serve immediately."
+          ]
+        }
+      ]
+    },
+    {
+      id: 'vegan-protein',
+      label: 'Vegan Options by Protein',
+      icon: '🌱',
+      description: "Find vegan meals by your favorite protein: beans, lentils, tofu, and more.",
+      recipes: [
+        {
+          name: "Lentil & Tomato Stew",
+          steps: [
+            "Sauté onion and garlic in oil.",
+            "Add red lentils, canned tomatoes, and vegetable broth.",
+            "Simmer 20–25 min until lentils are soft.",
+            "Add salt, pepper, herbs. Serve with bread."
+          ]
+        },
+        {
+          name: "Tofu Scramble Wrap",
+          steps: [
+            "Crumble firm tofu into a pan with oil.",
+            "Add turmeric, salt, pepper, and diced veggies.",
+            "Sauté 5–7 min, spoon into a wrap with salsa.",
+            "Roll and enjoy."
+          ]
+        },
+        {
+          name: "Chickpea Spinach Sauté",
+          steps: [
+            "Heat oil, sauté garlic and onion until soft.",
+            "Add chickpeas, cook 2–3 min.",
+            "Stir in spinach until wilted.",
+            "Season with lemon, salt, pepper. Serve hot."
+          ]
+        },
+        {
+          name: "Black Bean Stuffed Peppers",
+          steps: [
+            "Halve and deseed bell peppers.",
+            "Mix black beans, corn, salsa, and cumin.",
+            "Fill peppers, bake at 180°C/350°F for 20–25 min.",
+            "Serve topped with avocado if desired."
+          ]
+        },
+        {
+          name: "Peanut Butter Noodle Bowl",
+          steps: [
+            "Cook noodles as per package directions.",
+            "Whisk together peanut butter, soy sauce, a squeeze of lime, and a splash of water.",
+            "Toss cooked noodles with sauce and sliced cucumber or carrots.",
+            "Serve garnished with sesame seeds."
+          ]
+        },
+        {
+          name: "Kidney Bean Chili",
+          steps: [
+            "Sauté onion, garlic, and bell pepper in oil.",
+            "Add canned kidney beans, diced tomatoes, and chili powder.",
+            "Simmer 10–15 min, adjusting seasoning as needed.",
+            "Serve with rice or baked potato."
+          ]
+        },
+        {
+          name: "Hummus Veggie Wrap",
+          steps: [
+            "Spread hummus over tortilla or flatbread.",
+            "Add grated carrot, sliced cucumber, greens.",
+            "Wrap tightly and slice to serve."
+          ]
+        },
+        {
+          name: "Red Lentil Curry",
+          steps: [
+            "Sauté onion and curry powder in pot.",
+            "Add rinsed red lentils, coconut milk, and water.",
+            "Simmer until lentils are soft, 15–20 min.",
+            "Season with salt, sprinkle with cilantro."
+          ]
+        },
+        {
+          name: "Sesame Tofu Bites",
+          steps: [
+            "Pat tofu dry and cut into cubes.",
+            "Toss with soy sauce and sesame seeds.",
+            "Bake at 200°C/400°F for 20 min, flipping once.",
+            "Serve with steamed rice or veggies."
+          ]
+        },
+        {
+          name: "Bean & Corn Rice Skillet",
+          steps: [
+            "Heat oil in skillet, add canned beans and corn.",
+            "Stir in cooked rice and salsa; cook until heated.",
+            "Serve hot, topped with cilantro."
+          ]
+        }
+      ]
+    }
+  ];
+
+  const [selectedCategoryId, setSelectedCategoryId] = React.useState(CATEGORIES[0].id);
+
   return (
     <div className="app" style={{ background: '#FFF9C4', minHeight: '100vh' }}>
       {/* Navbar */}
@@ -103,316 +408,69 @@ function App() {
           {/* Recipe Categories */}
           <section id="recipes" style={{ marginBottom: 36, background: '#FFF9C4', borderRadius: 12, padding: '24px 0', boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
             <h2 style={{ color: '#FFD600', fontSize: '2rem', fontWeight: 700, marginBottom: 18, marginLeft: 24, letterSpacing: '0.01em' }}>Recipe Categories</h2>
+            {/* Category selection UI */}
+            <div
+              style={{
+                display: 'flex',
+                gap: '20px',
+                justifyContent: 'center',
+                margin: '10px 0 22px 0'
+              }}
+              aria-label="Select recipe category"
+            >
+              {CATEGORIES.map(category => (
+                <button
+                  key={category.id}
+                  type="button"
+                  style={{
+                    background: selectedCategoryId === category.id ? '#FFD600' : '#FFFDEB',
+                    color: selectedCategoryId === category.id ? '#222' : '#777',
+                    border: selectedCategoryId === category.id
+                      ? '2.5px solid #FFD600'
+                      : '1.5px solid #FFD600',
+                    borderRadius: 7,
+                    fontWeight: selectedCategoryId === category.id ? 700 : 500,
+                    fontSize: '1.05rem',
+                    letterSpacing: '0.02em',
+                    transition: 'all 0.1s',
+                    padding: '7px 24px',
+                    boxShadow: selectedCategoryId === category.id ? '0 1.5px 5px #FFE082' : 'none',
+                    cursor: selectedCategoryId === category.id ? 'default' : 'pointer',
+                    outline: selectedCategoryId === category.id ? '2px solid #FFD60055' : 'none',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 7
+                  }}
+                  onClick={() => setSelectedCategoryId(category.id)}
+                  aria-pressed={selectedCategoryId === category.id}
+                  tabIndex={0}
+                  disabled={selectedCategoryId === category.id}
+                >
+                  <span style={{ fontSize: '1.27em', verticalAlign: 'middle' }}>{category.icon}</span>
+                  {category.label}
+                </button>
+              ))}
+            </div>
+            {/* Only render the selected category */}
             <div style={{
               display: 'flex',
               gap: '32px',
               flexWrap: 'wrap',
               justifyContent: 'center',
               margin: '16px 0',
+              minHeight: 100
             }}>
-              {/* Category: 5-Ingredient Recipes */}
-              <CategoryCard
-                icon="🖐️"
-                title="5-Ingredient Recipes"
-                description="Minimal fuss, minimal shopping—delicious meals with just five ingredients!"
-                bgColor="#FFFDEB"
-                accentColor="#FFD600"
-                recipes={[
-                  {
-                    name: "Garlic Butter Pasta",
-                    steps: [
-                      "Cook pasta in boiling salted water until al dente.",
-                      "While pasta cooks, melt butter in a skillet and gently sauté minced garlic until fragrant.",
-                      "Drain pasta, reserving a splash of pasta water.",
-                      "Toss pasta with garlic butter, adding a bit of pasta water if dry. Season with salt and pepper.",
-                      "Serve hot, topped with grated cheese if desired."
-                    ]
-                  },
-                  {
-                    name: "Cheesy Tortilla Quesadilla",
-                    steps: [
-                      "Heat a skillet over medium.",
-                      "Place a tortilla in the pan, evenly sprinkle shredded cheese over half.",
-                      "Fold tortilla over to cover cheese.",
-                      "Cook until golden brown, flip, and cook second side until cheese is melted.",
-                      "Cut into wedges and serve."
-                    ]
-                  },
-                  {
-                    name: "Peanut Butter Banana Toast",
-                    steps: [
-                      "Toast bread slices to your liking.",
-                      "Spread peanut butter onto warm toast.",
-                      "Slice banana and arrange over peanut butter.",
-                      "Drizzle with honey and a pinch of cinnamon if desired.",
-                      "Serve immediately."
-                    ]
-                  },
-                  {
-                    name: "Egg Fried Rice",
-                    steps: [
-                      "Heat oil in a pan/wok, scramble eggs and set aside.",
-                      "In same pan, add a bit more oil and stir-fry cooked rice until hot.",
-                      "Add in thawed peas/carrot mix and the scrambled eggs.",
-                      "Season with soy sauce, mixing well.",
-                      "Serve garnished with spring onions."
-                    ]
-                  },
-                  {
-                    name: "Tomato Soup with Grilled Cheese",
-                    steps: [
-                      "In a pot, heat canned tomato soup and water/milk as directed.",
-                      "Meanwhile, butter bread slices and add cheese in between.",
-                      "Grill in a pan on both sides until bread is golden and cheese melted.",
-                      "Cut sandwich into halves and serve with hot soup."
-                    ]
-                  },
-                  {
-                    name: "Chickpea and Spinach Curry",
-                    steps: [
-                      "Sauté onion and garlic in oil until soft.",
-                      "Add canned chickpeas (drained), canned diced tomatoes, and curry powder.",
-                      "Simmer 10 minutes, stir in fresh spinach until wilted.",
-                      "Season with salt and serve with rice or bread."
-                    ]
-                  },
-                  {
-                    name: "Avocado Toast Deluxe",
-                    steps: [
-                      "Toast whole grain bread.",
-                      "Mash ripe avocado with lemon, salt, pepper.",
-                      "Spread mash over toast, top with sliced tomato or radish.",
-                      "Sprinkle optional chili flakes or seeds.",
-                      "Serve immediately."
-                    ]
-                  },
-                  {
-                    name: "One-Pan Sausage & Veg",
-                    steps: [
-                      "Slice sausage and chop veggies (bell pepper, onion, zucchini, etc).",
-                      "Heat oil in skillet, cook sausage until browned.",
-                      "Add veggies, sauté until tender.",
-                      "Season with salt, pepper, herbs.",
-                      "Serve hot."
-                    ]
-                  },
-                  {
-                    name: "Tuna Mayo Rice Bowl",
-                    steps: [
-                      "Cook rice according to package.",
-                      "Mix canned tuna with mayonnaise, a pinch of salt, pepper.",
-                      "Serve tuna mixture over hot rice, add sliced cucumber or corn if desired.",
-                      "Garnish with green onions."
-                    ]
-                  },
-                  {
-                    name: "Honey Soy Chicken Stir-Fry",
-                    steps: [
-                      "Cut chicken into strips and veggies of choice.",
-                      "Heat oil, stir-fry chicken until mostly cooked.",
-                      "Add veggies and cook until crisp-tender.",
-                      "Stir in honey and soy sauce, toss to coat.",
-                      "Serve with steamed rice."
-                    ]
-                  }
-                ]}
-              />
-              {/* Category: Student Meals */}
-              <CategoryCard
-                icon="🕒"
-                title="Student Meals"
-                description="Quick, affordable and filling recipes you can prepare in under 30 minutes."
-                bgColor="#FFFDEB"
-                accentColor="#FFD600"
-                recipes={[
-                  {
-                    name: "Microwave Mug Omelette",
-                    steps: [
-                      "In a mug, beat 2 eggs with a splash of milk.",
-                      "Add chopped veggies and grated cheese.",
-                      "Microwave 60–90 seconds until puffed and set.",
-                      "Season with salt and enjoy from the mug."
-                    ]
-                  },
-                  {
-                    name: "One-Pot Ramen Bowl",
-                    steps: [
-                      "Boil water in a saucepan, add ramen noodles and included seasoning.",
-                      "When nearly cooked, stir in frozen veggies or spinach and an egg if desired.",
-                      "Simmer until noodles and veggies are tender.",
-                      "Serve immediately."
-                    ]
-                  },
-                  {
-                    name: "Wrap Pizza Express",
-                    steps: [
-                      "Lay a tortilla wrap on a baking tray.",
-                      "Spread tomato sauce and sprinkle cheese on top.",
-                      "Add sliced veggies or pepperoni if using.",
-                      "Grill or bake until cheese bubbles and edges crisp.",
-                      "Slice and serve."
-                    ]
-                  },
-                  {
-                    name: "Canned Chili Nachos",
-                    steps: [
-                      "Preheat oven to 180°C/350°F.",
-                      "Spread tortilla chips on a baking dish.",
-                      "Top with canned chili and shredded cheese.",
-                      "Bake until cheese is melted and bubbly.",
-                      "Serve with sour cream or sliced jalapeños."
-                    ]
-                  },
-                  {
-                    name: "Pita Pocket Sandwiches",
-                    steps: [
-                      "Cut pita breads in half, form pockets.",
-                      "Fill with hummus, chopped salad, and cheese or chicken strips.",
-                      "Wrap and enjoy fresh."
-                    ]
-                  },
-                  {
-                    name: "Taco Rice Skillet",
-                    steps: [
-                      "Brown ground beef (or beans) in pan.",
-                      "Add taco seasoning and cooked rice.",
-                      "Stir in salsa and heat through.",
-                      "Serve with shredded cheese and lettuce."
-                    ]
-                  },
-                  {
-                    name: "Toasted Cheese Melt",
-                    steps: [
-                      "Butter two bread slices, add cheese in between.",
-                      "Toast in sandwich press or skillet until golden on both sides.",
-                      "Slice diagonally and serve warm."
-                    ]
-                  },
-                  {
-                    name: "No-Cook Greek Salad",
-                    steps: [
-                      "Chop cucumber, tomatoes, onion, and olives.",
-                      "Toss with olive oil, salt, pepper, and feta cheese.",
-                      "Serve cold."
-                    ]
-                  },
-                  {
-                    name: "Black Bean Burritos",
-                    steps: [
-                      "Mash canned black beans with salsa.",
-                      "Spread mixture on tortillas, add cheese.",
-                      "Roll, wrap, then microwave or grill till warm."
-                    ]
-                  },
-                  {
-                    name: "Simple Stir-Fried Udon",
-                    steps: [
-                      "Heat oil, stir-fry chopped veggies in pan.",
-                      "Add cooked udon noodles and soy sauce.",
-                      "Stir-fry until hot. Serve immediately."
-                    ]
-                  }
-                ]}
-              />
-              {/* Category: Vegan by Protein */}
-              <CategoryCard
-                icon="🌱"
-                title="Vegan Options by Protein"
-                description="Find vegan meals by your favorite protein: beans, lentils, tofu, and more."
-                bgColor="#FFFDEB"
-                accentColor="#FFD600"
-                recipes={[
-                  {
-                    name: "Lentil & Tomato Stew",
-                    steps: [
-                      "Sauté onion and garlic in oil.",
-                      "Add red lentils, canned tomatoes, and vegetable broth.",
-                      "Simmer 20–25 min until lentils are soft.",
-                      "Add salt, pepper, herbs. Serve with bread."
-                    ]
-                  },
-                  {
-                    name: "Tofu Scramble Wrap",
-                    steps: [
-                      "Crumble firm tofu into a pan with oil.",
-                      "Add turmeric, salt, pepper, and diced veggies.",
-                      "Sauté 5–7 min, spoon into a wrap with salsa.",
-                      "Roll and enjoy."
-                    ]
-                  },
-                  {
-                    name: "Chickpea Spinach Sauté",
-                    steps: [
-                      "Heat oil, sauté garlic and onion until soft.",
-                      "Add chickpeas, cook 2–3 min.",
-                      "Stir in spinach until wilted.",
-                      "Season with lemon, salt, pepper. Serve hot."
-                    ]
-                  },
-                  {
-                    name: "Black Bean Stuffed Peppers",
-                    steps: [
-                      "Halve and deseed bell peppers.",
-                      "Mix black beans, corn, salsa, and cumin.",
-                      "Fill peppers, bake at 180°C/350°F for 20–25 min.",
-                      "Serve topped with avocado if desired."
-                    ]
-                  },
-                  {
-                    name: "Peanut Butter Noodle Bowl",
-                    steps: [
-                      "Cook noodles as per package directions.",
-                      "Whisk together peanut butter, soy sauce, a squeeze of lime, and a splash of water.",
-                      "Toss cooked noodles with sauce and sliced cucumber or carrots.",
-                      "Serve garnished with sesame seeds."
-                    ]
-                  },
-                  {
-                    name: "Kidney Bean Chili",
-                    steps: [
-                      "Sauté onion, garlic, and bell pepper in oil.",
-                      "Add canned kidney beans, diced tomatoes, and chili powder.",
-                      "Simmer 10–15 min, adjusting seasoning as needed.",
-                      "Serve with rice or baked potato."
-                    ]
-                  },
-                  {
-                    name: "Hummus Veggie Wrap",
-                    steps: [
-                      "Spread hummus over tortilla or flatbread.",
-                      "Add grated carrot, sliced cucumber, greens.",
-                      "Wrap tightly and slice to serve."
-                    ]
-                  },
-                  {
-                    name: "Red Lentil Curry",
-                    steps: [
-                      "Sauté onion and curry powder in pot.",
-                      "Add rinsed red lentils, coconut milk, and water.",
-                      "Simmer until lentils are soft, 15–20 min.",
-                      "Season with salt, sprinkle with cilantro."
-                    ]
-                  },
-                  {
-                    name: "Sesame Tofu Bites",
-                    steps: [
-                      "Pat tofu dry and cut into cubes.",
-                      "Toss with soy sauce and sesame seeds.",
-                      "Bake at 200°C/400°F for 20 min, flipping once.",
-                      "Serve with steamed rice or veggies."
-                    ]
-                  },
-                  {
-                    name: "Bean & Corn Rice Skillet",
-                    steps: [
-                      "Heat oil in skillet, add canned beans and corn.",
-                      "Stir in cooked rice and salsa; cook until heated.",
-                      "Serve hot, topped with cilantro."
-                    ]
-                  }
-                ]}
-              />
-              
+              {CATEGORIES.filter(c => c.id === selectedCategoryId).map(category => (
+                <CategoryCard
+                  key={category.id}
+                  icon={category.icon}
+                  title={category.label}
+                  description={category.description}
+                  bgColor="#FFFDEB"
+                  accentColor="#FFD600"
+                  recipes={category.recipes}
+                />
+              ))}
             </div>
           </section>
 
