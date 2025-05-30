@@ -1,0 +1,4 @@
+{
+    "command": "PORT=<port> BROWSER=none npm start",
+    "working_directory": "/home/kavia/workspace/code-generation/easybite-budget-friendly-recipes-for-beginners-15511-34a97e78/main_container_for_easybite"
+}
