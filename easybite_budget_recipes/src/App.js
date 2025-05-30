@@ -632,4 +632,272 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
   );
 }
 
+/**
+ * Build-a-Recipe Tool component.
+ * This refactored tool prompts the user to select ingredients first,
+ * and generates a recipe only after the user has made their selection.
+ * No recipes or suggestions are shown by default, per requirements.
+ */
+// PUBLIC_INTERFACE
+function BuildARecipeTool() {
+  // List of ingredients to choose from
+  const INGREDIENT_OPTIONS = [
+    "Pasta",
+    "Eggs",
+    "Tomato",
+    "Soy Sauce",
+    "Rice",
+    "Beans",
+    "Spinach",
+    "Potatoes",
+    "Chicken",
+    "Tofu"
+  ];
+
+  // Structured recipe options for matching (each recipe requires a subset of ingredients)
+  const RECIPE_BANK = [
+    {
+      name: "Garlic Butter Pasta",
+      required: ["Pasta"],
+      steps: [
+        "Cook pasta in boiling salted water until al dente.",
+        "While pasta cooks, melt butter in a skillet and gently sauté minced garlic until fragrant.",
+        "Drain pasta, reserving a splash of pasta water.",
+        "Toss pasta with garlic butter, adding a bit of pasta water if dry. Season with salt and pepper.",
+        "Serve hot, topped with grated cheese if desired."
+      ]
+    },
+    {
+      name: "Egg Fried Rice",
+      required: ["Eggs", "Rice", "Soy Sauce"],
+      steps: [
+        "Heat oil in a pan/wok, scramble eggs and set aside.",
+        "In same pan, add a bit more oil and stir-fry cooked rice until hot.",
+        "Add in thawed peas/carrot mix and the scrambled eggs.",
+        "Season with soy sauce, mixing well.",
+        "Serve garnished with spring onions."
+      ]
+    },
+    {
+      name: "Chickpea Spinach Sauté",
+      required: ["Beans", "Spinach"],
+      steps: [
+        "Heat oil, sauté garlic and onion until soft.",
+        "Add chickpeas, cook 2–3 min.",
+        "Stir in spinach until wilted.",
+        "Season with lemon, salt, pepper. Serve hot."
+      ]
+    },
+    {
+      name: "Peanut Butter Noodle Bowl",
+      required: ["Pasta", "Soy Sauce"],
+      steps: [
+        "Cook noodles as per package directions.",
+        "Whisk together peanut butter, soy sauce, a squeeze of lime, and a splash of water.",
+        "Toss cooked noodles with sauce and sliced cucumber or carrots.",
+        "Serve garnished with sesame seeds."
+      ]
+    },
+    {
+      name: "Avocado Toast Deluxe",
+      required: ["Tomato"],
+      steps: [
+        "Toast whole grain bread.",
+        "Mash ripe avocado with lemon, salt, pepper.",
+        "Spread mash over toast, top with sliced tomato or radish.",
+        "Sprinkle optional chili flakes or seeds.",
+        "Serve immediately."
+      ]
+    },
+    {
+      name: "Red Lentil Curry",
+      required: ["Beans"],
+      steps: [
+        "Sauté onion and curry powder in pot.",
+        "Add rinsed red lentils, coconut milk, and water.",
+        "Simmer until lentils are soft, 15–20 min.",
+        "Season with salt, sprinkle with cilantro."
+      ]
+    },
+    {
+      name: "Tuna Mayo Rice Bowl",
+      required: ["Rice"],
+      steps: [
+        "Cook rice according to package.",
+        "Mix canned tuna with mayonnaise, pinch of salt and pepper.",
+        "Serve tuna mixture over hot rice, add sliced cucumber or corn if desired.",
+        "Garnish with green onions."
+      ]
+    },
+    {
+      name: "Tofu Scramble Wrap",
+      required: ["Tofu"],
+      steps: [
+        "Crumble firm tofu into a pan with oil.",
+        "Add turmeric, salt, pepper, and diced veggies.",
+        "Sauté 5–7 min, spoon into a wrap with salsa.",
+        "Roll and enjoy."
+      ]
+    },
+    {
+      name: "Black Bean Stuffed Peppers",
+      required: ["Beans"],
+      steps: [
+        "Halve and deseed bell peppers.",
+        "Mix black beans, corn, salsa, and cumin.",
+        "Fill peppers, bake at 180°C/350°F for 20–25 min.",
+        "Serve topped with avocado if desired."
+      ]
+    }
+  ];
+
+  const [selected, setSelected] = React.useState([]);
+  const [results, setResults] = React.useState(null);
+  const [touched, setTouched] = React.useState(false);
+
+  // Toggle ingredient in the selected array
+  const toggleIngredient = (ing) => {
+    setTouched(true);
+    setSelected((sel) =>
+      sel.includes(ing) ? sel.filter((i) => i !== ing) : [...sel, ing]
+    );
+  };
+
+  // Find recipes matching at least the selected ingredients
+  const findRecipes = () => {
+    if (!selected.length) {
+      setResults([]);
+      return;
+    }
+    // For simplicity, recipes that all their required ingredients are included in selected
+    const found = RECIPE_BANK.filter(recipe =>
+      recipe.required.every(req => selected.includes(req))
+    );
+    setResults(found);
+  };
+
+  // UI: selection form, then show recipes if found
+  return (
+    <div
+      style={{
+        background: '#FFF',
+        padding: '20px 18px',
+        borderRadius: 8,
+        boxShadow: '0 1px 6px rgba(34,34,34,0.06)',
+        width: '100%',
+        maxWidth: 490,
+        margin: '0 auto'
+      }}
+    >
+      {/* Ingredient selection */}
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '8px 12px',
+        justifyContent: 'center',
+        marginBottom: 8
+      }}>
+        {INGREDIENT_OPTIONS.map((ingredient) => (
+          <button
+            key={ingredient}
+            type="button"
+            tabIndex={0}
+            onClick={() => toggleIngredient(ingredient)}
+            aria-pressed={selected.includes(ingredient)}
+            style={{
+              background: selected.includes(ingredient) ? "#FFD600" : "#FFF9C4",
+              color: "#222",
+              border: selected.includes(ingredient) ? '2px solid #FFD600' : '1px solid #FFD600',
+              borderRadius: 4,
+              padding: '6px 16px',
+              cursor: "pointer",
+              fontWeight: 500,
+              outline: selected.includes(ingredient)
+                ? "2px solid #FFEB3B"
+                : "none",
+              transition: "all 0.13s",
+              boxShadow: selected.includes(ingredient)
+                ? "0 0 2px #FFD600"
+                : "none",
+            }}
+          >
+            {ingredient}
+          </button>
+        ))}
+      </div>
+      <button
+        className="btn"
+        style={{
+          background: '#FFD600',
+          color: '#222',
+          fontWeight: 600,
+          fontSize: '1rem',
+          width: '100%',
+          marginTop: 10,
+          marginBottom: 2,
+        }}
+        disabled={!selected.length}
+        onClick={findRecipes}
+        aria-disabled={!selected.length}
+      >
+        {selected.length ? "Show Recipes" : "Select Ingredients"}
+      </button>
+
+      {/* Results Section (shown only after Find is pressed) */}
+      {results && (
+        <div style={{ marginTop: 18 }}>
+          {results.length === 0 ? (
+            <div style={{ color: '#C62828', fontWeight: 500 }}>
+              {touched
+                ? "No recipes found with the selected ingredients."
+                : "Select ingredients to build a recipe."}
+            </div>
+          ) : (
+            <>
+              <div style={{
+                fontWeight: 600,
+                color: '#222',
+                marginBottom: 5,
+                fontSize: '1.07rem'
+              }}>
+                Recipes you can make:
+              </div>
+              <ul style={{
+                paddingLeft: 0,
+                margin: 0,
+                listStyle: "none"
+              }}>
+                {results.map((recipe, idx) => (
+                  <li
+                    key={recipe.name}
+                    style={{
+                      background: "#FFFDEB",
+                      border: "1.5px solid #FFD600",
+                      borderRadius: 6,
+                      padding: "10px 12px",
+                      marginBottom: 7,
+                      fontSize: "0.98rem"
+                    }}
+                  >
+                    <div style={{
+                      fontWeight: 700,
+                      color: "#FFD600",
+                      marginBottom: 4
+                    }}>{recipe.name}</div>
+                    <ol style={{ paddingLeft: 19, margin: 0 }}>
+                      {(recipe.steps || []).map((step, sidx) => (
+                        <li key={sidx} style={{ marginBottom: 1 }}>{step}</li>
+                      ))}
+                    </ol>
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default App;
