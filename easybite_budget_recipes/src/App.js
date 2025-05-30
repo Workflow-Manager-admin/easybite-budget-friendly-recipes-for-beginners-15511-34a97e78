@@ -524,11 +524,11 @@ function App() {
 /**
  * Reusable Card for Recipe Categories.
  * 
- * Refactored: Shows recipes in a horizontal grid/scroll row with each recipe as a horizontal card,
- * with ingredients/title at left and step-by-step on the right (side-by-side), minimizing vertical whitespace.
+ * Refactored: Shows recipes in a responsive 3-column grid layout, wrapping extra recipes to new rows for clarity and space usage.
+ * All recipe card formatting and step-by-step instructions remain clear and accessible.
  */
 function CategoryCard({ icon, title, description, accentColor, bgColor, recipes }) {
-  // Helper: for visual horizontal list
+  // Helper: Responsive grid for recipes (3 per row, wrapping)
   return (
     <div style={{
       flex: '1 1 180px',
@@ -557,15 +557,12 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
           style={{
             width: '100%',
             marginTop: 18,
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '20px',
-            overflowX: 'auto',
-            paddingBottom: 8,
-            justifyContent: 'flex-start',
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gap: '22px 22px',
+            justifyContent: 'center',
             alignItems: 'stretch',
-            // Scrollbar styling for horizontal
-            scrollbarWidth: 'thin',
+            paddingBottom: 8,
           }}
         >
           {recipes.map((r, idx) =>
@@ -583,6 +580,8 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
                   justifyContent: 'center',
                   alignItems: 'flex-start',
                   boxShadow: "0 1px 5px rgba(200,170,10,0.07)",
+                  height: "100%",
+                  textAlign: 'left'
                 }}
               >
                 <div style={{ fontWeight: 600 }}>{r}</div>
@@ -591,49 +590,42 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
               <div
                 key={idx}
                 style={{
-                  minWidth: 260,
-                  maxWidth: 340,
                   background: '#FFFDEB',
                   border: `1.5px solid ${accentColor}`,
                   borderRadius: 10,
                   boxShadow: '0 1px 8px #ffe08222',
                   padding: '15px 15px 14px 15px',
                   display: 'flex',
-                  flexDirection: 'row',
+                  flexDirection: 'column',
                   alignItems: 'flex-start',
-                  gap: '13px',
+                  gap: '10px',
                   marginBottom: 0,
+                  height: '100%',
+                  minWidth: 0,
+                  textAlign: 'left',
                 }}
               >
-                {/* Left: Title/Ingredients (if present) */}
+                {/* Name/title */}
                 <div style={{
-                  flex: 1,
-                  minWidth: 88,
-                  textAlign: 'left',
-                  marginRight: 10,
+                  fontWeight: 700,
+                  color: accentColor,
+                  fontSize: '1.07rem',
+                  marginBottom: 4,
+                  letterSpacing: 0,
                 }}>
-                  <div style={{
-                    fontWeight: 700,
-                    color: accentColor,
-                    fontSize: '1.07rem',
-                    marginBottom: 4,
-                    letterSpacing: 0,
-                  }}>{r.name}</div>
-                  {/* Potential place for ingredients if added later */}
+                  {r.name}
                 </div>
-                {/* Right: Steps, numbered horizontally if space allows, else stacked */}
-                <ol
-                  style={{
-                    flex: 2,
-                    margin: 0,
-                    padding: '0 0 0 18px',
-                    listStyle: 'decimal',
-                    fontSize: '0.97rem',
-                    color: '#444',
-                    lineHeight: 1.45,
-                    fontWeight: 400,
-                  }}
-                >
+                {/* Steps: vertical numbered, clear and accessible */}
+                <ol style={{
+                  margin: 0,
+                  padding: '0 0 0 18px',
+                  listStyle: 'decimal',
+                  fontSize: '0.97rem',
+                  color: '#444',
+                  lineHeight: 1.45,
+                  fontWeight: 400,
+                  textAlign: 'left'
+                }}>
                   {(r.steps || []).map((step, sidx) => (
                     <li
                       key={sidx}
@@ -641,7 +633,6 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
                         marginBottom: 4,
                         whiteSpace: 'normal',
                         textAlign: 'left',
-                        // Responsive: side-by-side for short steps, stacked for longer
                         width: '100%'
                       }}
                     >
