@@ -523,8 +523,12 @@ function App() {
 
 /**
  * Reusable Card for Recipe Categories.
+ * 
+ * Refactored: Shows recipes in a horizontal grid/scroll row with each recipe as a horizontal card,
+ * with ingredients/title at left and step-by-step on the right (side-by-side), minimizing vertical whitespace.
  */
 function CategoryCard({ icon, title, description, accentColor, bgColor, recipes }) {
+  // Helper: for visual horizontal list
   return (
     <div style={{
       flex: '1 1 180px',
@@ -538,8 +542,8 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
       flexDirection: 'column',
       gap: 10,
       border: `1.5px solid ${accentColor}`,
-      maxWidth: 220,
-      marginBottom: 10
+      marginBottom: 10,
+      maxWidth: '100%',
     }}>
       <span style={{ fontSize: '2.2rem', marginBottom: 6 }}>
         {icon}
@@ -549,41 +553,106 @@ function CategoryCard({ icon, title, description, accentColor, bgColor, recipes 
       </div>
       <div style={{ color: '#555', fontSize: '0.97rem', fontWeight: 400 }}>{description}</div>
       {Array.isArray(recipes) && (
-        <ul style={{
-          margin: '16px 0 0 0',
-          padding: 0,
-          listStyle: 'none',
-          textAlign: 'left',
-          fontSize: '0.97rem',
-          color: '#444',
-          lineHeight: 1.45,
-          fontWeight: 400
-        }}>
+        <div
+          style={{
+            width: '100%',
+            marginTop: 18,
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '20px',
+            overflowX: 'auto',
+            paddingBottom: 8,
+            justifyContent: 'flex-start',
+            alignItems: 'stretch',
+            // Scrollbar styling for horizontal
+            scrollbarWidth: 'thin',
+          }}
+        >
           {recipes.map((r, idx) =>
             typeof r === "string" ? (
-              <li key={idx}
+              <div
+                key={idx}
                 style={{
-                  padding: '1px 0',
-                  borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
-                }}
-              >{r}</li>
-            ) : (
-              <li key={idx}
-                style={{
-                  padding: '8px 0',
-                  borderBottom: idx !== recipes.length - 1 ? '1px solid #ffe082' : 'none'
+                  minWidth: 200,
+                  padding: '10px 12px',
+                  background: '#FFFDEB',
+                  borderRadius: 10,
+                  border: `1px solid ${accentColor}`,
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'center',
+                  alignItems: 'flex-start',
+                  boxShadow: "0 1px 5px rgba(200,170,10,0.07)",
                 }}
               >
-                <div style={{ fontWeight: 600, marginBottom: 3 }}>{r.name}</div>
-                <ol style={{ paddingLeft: "20px", margin: 0 }}>
+                <div style={{ fontWeight: 600 }}>{r}</div>
+              </div>
+            ) : (
+              <div
+                key={idx}
+                style={{
+                  minWidth: 260,
+                  maxWidth: 340,
+                  background: '#FFFDEB',
+                  border: `1.5px solid ${accentColor}`,
+                  borderRadius: 10,
+                  boxShadow: '0 1px 8px #ffe08222',
+                  padding: '15px 15px 14px 15px',
+                  display: 'flex',
+                  flexDirection: 'row',
+                  alignItems: 'flex-start',
+                  gap: '13px',
+                  marginBottom: 0,
+                }}
+              >
+                {/* Left: Title/Ingredients (if present) */}
+                <div style={{
+                  flex: 1,
+                  minWidth: 88,
+                  textAlign: 'left',
+                  marginRight: 10,
+                }}>
+                  <div style={{
+                    fontWeight: 700,
+                    color: accentColor,
+                    fontSize: '1.07rem',
+                    marginBottom: 4,
+                    letterSpacing: 0,
+                  }}>{r.name}</div>
+                  {/* Potential place for ingredients if added later */}
+                </div>
+                {/* Right: Steps, numbered horizontally if space allows, else stacked */}
+                <ol
+                  style={{
+                    flex: 2,
+                    margin: 0,
+                    padding: '0 0 0 18px',
+                    listStyle: 'decimal',
+                    fontSize: '0.97rem',
+                    color: '#444',
+                    lineHeight: 1.45,
+                    fontWeight: 400,
+                  }}
+                >
                   {(r.steps || []).map((step, sidx) => (
-                    <li key={sidx} style={{ marginBottom: 2 }}>{step}</li>
+                    <li
+                      key={sidx}
+                      style={{
+                        marginBottom: 4,
+                        whiteSpace: 'normal',
+                        textAlign: 'left',
+                        // Responsive: side-by-side for short steps, stacked for longer
+                        width: '100%'
+                      }}
+                    >
+                      {step}
+                    </li>
                   ))}
                 </ol>
-              </li>
+              </div>
             )
           )}
-        </ul>
+        </div>
       )}
     </div>
   );
