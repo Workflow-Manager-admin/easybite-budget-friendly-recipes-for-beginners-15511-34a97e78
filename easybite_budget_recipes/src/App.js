@@ -833,7 +833,8 @@ function BuildARecipeTool() {
                       borderRadius: 6,
                       padding: "10px 12px",
                       marginBottom: 7,
-                      fontSize: "0.98rem"
+                      fontSize: "0.98rem",
+                      color: "#212121" // Ensures highly contrasting recipe/output text
                     }}
                   >
                     <div style={{
@@ -843,7 +844,7 @@ function BuildARecipeTool() {
                     }}>{recipe.name}</div>
                     <ol style={{ paddingLeft: 19, margin: 0 }}>
                       {(recipe.steps || []).map((step, sidx) => (
-                        <li key={sidx} style={{ marginBottom: 1 }}>{step}</li>
+                        <li key={sidx} style={{ marginBottom: 1, color: "#333" }}>{step}</li>
                       ))}
                     </ol>
                   </li>
