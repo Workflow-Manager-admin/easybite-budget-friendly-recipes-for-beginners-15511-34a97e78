@@ -895,51 +895,78 @@ function App() {
           {/* Recipe Categories */}
           <section id="recipes" style={{ marginBottom: 36, background: '#FFF9C4', borderRadius: 12, padding: '24px 0', boxShadow: '0 1px 8px rgba(0,0,0,0.05)' }}>
             <h2 style={{ color: '#FFD600', fontSize: '2rem', fontWeight: 700, marginBottom: 18, marginLeft: 24, letterSpacing: '0.01em' }}>Recipe Categories</h2>
-            {/* Render ALL categories in rows of 3 */}
-            <div
+            {/* Category selection controls */}
+            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 }}>
+              {/* Dropdown for compact screens */}
+              <select
+                value={selectedCategoryId}
+                onChange={e => setSelectedCategoryId(e.target.value)}
                 style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  gap: '32px',
-                  margin: '16px 0',
-                  alignItems: 'center',
-                  minHeight: 100
+                  display: 'none',
+                  padding: '8px 15px',
+                  borderRadius: 5,
+                  border: '1.7px solid #FFD600',
+                  fontWeight: 600,
+                  fontSize: '1rem',
+                  background: '#FFFDEB',
+                  color: '#222',
+                  marginRight: 16,
+                  marginBottom: 0,
+                  outline: 'none',
+                  boxShadow: '0 1px 5px #ffe08222'
                 }}
-            >
-              {/* Arrange recipe columns: first 3 in first row, next 3 in second row, rest in further rows */}
-              {(() => {
-                // Prepare category card nodes first
-                const categoryCards = CATEGORIES.map(category => (
-                  <CategoryCard
-                    key={category.id}
-                    icon={category.icon}
-                    title={category.label}
-                    description={category.description}
-                    bgColor="#FFFDEB"
-                    accentColor="#FFD600"
-                    recipes={category.recipes}
-                  />
-                ));
-                // Break into rows (maximum of 3 per row)
-                const rows = [];
-                for (let i = 0; i < categoryCards.length; i += 3) {
-                  rows.push(categoryCards.slice(i, i + 3));
-                }
-                return rows.map((rowCards, rowIdx) => (
-                  <div
-                    key={rowIdx}
+                id="recipes-category-select"
+                aria-label="Select recipe category"
+              >
+                {CATEGORIES.map(cat => (
+                  <option key={cat.id} value={cat.id}>{cat.icon} {cat.label}</option>
+                ))}
+              </select>
+              {/* Button group for most screens */}
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
+                {CATEGORIES.map(cat => (
+                  <button
+                    key={cat.id}
+                    type="button"
+                    tabIndex={0}
+                    aria-pressed={selectedCategoryId === cat.id}
+                    title={cat.label}
                     style={{
-                      display: 'flex',
-                      gap: '32px',
-                      flexWrap: 'wrap',
-                      justifyContent: 'center',
-                      width: '100%',
+                      display: 'inline-block',
+                      fontSize: '1.07rem',
+                      fontWeight: selectedCategoryId === cat.id ? 700 : 500,
+                      background: selectedCategoryId === cat.id ? '#FFD600' : '#FFFDEB',
+                      color: selectedCategoryId === cat.id ? '#222' : '#9d8400',
+                      border: selectedCategoryId === cat.id ? '2px solid #FFD600' : '1.5px solid #FFD600',
+                      borderRadius: 7,
+                      padding: '7px 18px',
+                      minWidth: 90,
+                      cursor: 'pointer',
+                      boxShadow: selectedCategoryId === cat.id ? '0 1px 5px #ffe08255' : '0 1px 3px #ffe08222',
+                      transition: 'all 0.12s',
+                      outline: selectedCategoryId === cat.id ? '2px solid #FFEB3B' : 'none'
                     }}
+                    onClick={() => setSelectedCategoryId(cat.id)}
                   >
-                    {rowCards}
-                  </div>
-                ));
-              })()}
+                    <span aria-hidden="true" style={{ marginRight: 6 }}>{cat.icon}</span>
+                    {cat.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+            {/* Render the selected category only */}
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "stretch", minHeight: 100 }}>
+              {CATEGORIES.filter(c => c.id === selectedCategoryId).map(category => (
+                <CategoryCard
+                  key={category.id}
+                  icon={category.icon}
+                  title={category.label}
+                  description={category.description}
+                  bgColor="#FFFDEB"
+                  accentColor="#FFD600"
+                  recipes={category.recipes}
+                />
+              ))}
             </div>
           </section>
 
